@@ -20,35 +20,32 @@ Output:
 [0,0,1,1,0]
 ];
 
-// Unable to solve;
-Time Complexity: At least polynomial time O(n^2)
-
+Time Complexity: O(m+n) 
 */
 
-function twoDArr(array) {
-
-  let modifiedArray = array;
-
+const twoDArr = (array) => {
+  let rowsZero = [];
+  let colsZero = [];
+  
   for (let i = 0; i < array.length; i++) {
-    for (let j = 0; j < array.length; j++) {
-
+    for (let j = 0; j < array[0].length; j++) {
       if (array[i][j] === 0) {
-        if (i >= 0 && i < array.length - 1) {
-          modifiedArray[i + 1][j] = 0;
-
-        }
-        if (j > 0 && j < array[i].length - 1) {
-          modifiedArray[i][j - 1] = 0;
-          modifiedArray[i][j + 1] = 0;
-        }
+        rowsZero.push(i);
+        colsZero.push(j);
       }
-
-
     }
   }
 
-  return modifiedArray;
-}
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array[0].length; j++) {
+      if (rowsZero.includes(i) || colsZero.includes(j)) {
+        array[i][j] = 0;
+      }
+    }
+  }
+  return array;
+};
+
 
 const array = [
   [1,0,1,1,0],
